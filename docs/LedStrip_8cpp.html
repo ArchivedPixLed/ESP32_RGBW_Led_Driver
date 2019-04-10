@@ -100,7 +100,13 @@ static void&#160;</td><td class="memItemRight" valign="bottom"><b>setTerminator<
 static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>getChannelValueByType</b> (char type, <a class="el" href="structrgb__pixel.html">rgb_pixel</a> pixel)</td></tr>
 <tr class="separator:ace8d541c14b78d8bcd78d97b4b88ed37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Two functions, RGBtoRGBW1 and RGBtoRGBW2, are available to convert RGB components to RGBW components.</p>
+<p>By default, RGBtoRGBW2 is used. You can set up the function :</p><ul>
+<li>at compile time, with Make Menuconfig =&gt; Component config =&gt; Led <a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> Config</li>
+<li>at runtime, see <a class="el" href="classRGBW__Strip.html#a37960460a546a371802dc728d10d8ee0" title="Sets the RGB to RGBW converter used for RGBW strips.">RGBW_Strip::setRgbToRgbwConverter</a> </li>
+</ul>
+</div><h2 class="groupheader">Function Documentation</h2>
 <a id="ae8542fcc9398190fd5f16e7553002d56"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8542fcc9398190fd5f16e7553002d56">&#9670;&nbsp;</a></span>HSBtoRGB()</h2>
 

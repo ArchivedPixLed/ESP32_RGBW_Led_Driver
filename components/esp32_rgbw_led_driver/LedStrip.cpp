@@ -15,6 +15,14 @@
 #endif
 /**
  * @file LedStrip.cpp
+ *
+ * Two functions, RGBtoRGBW1 and RGBtoRGBW2, are available to convert RGB
+ * components to RGBW components.
+ *
+ * By default, RGBtoRGBW2 is used. You can set up the function :
+ *  - at compile time, with Make Menuconfig => Component config => Led Strip Config
+ *  - at runtime, see RGBW_Strip::setRgbToRgbwConverter
+ *
  */
 
 /**
