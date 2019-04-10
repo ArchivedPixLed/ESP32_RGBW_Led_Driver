@@ -57,7 +57,7 @@ In HSB :
 ```
 strip.setHSBPixel(i, hue, saturation, brightness);
 ```
-For RGBW strips, the white component will automatically be computed. For more detailed, see ???
+For RGBW strips, the white component will automatically be computed. For more details, see the [reference](https://pixled.github.io/ESP32_RGBW_Led_Driver/LedStrip_8cpp.html).
 
 You can also set the white component manually using :
 ```
