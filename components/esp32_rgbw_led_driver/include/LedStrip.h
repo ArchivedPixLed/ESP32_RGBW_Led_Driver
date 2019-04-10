@@ -47,7 +47,11 @@ static const char* LOG_TAG = "LedStrip";
 
 /**
  * @mainpage ESP32 Led Strip Driver (RGB and RGBW)
+ *
+ * @author PaulBreugnot
  * @brief Driver for Strip/NeoPixel data.
+ * @see GitHub : https://github.com/PixLed/ESP32_RGBW_Led_Driver/
+ *
  *
  * NeoPixels or Strips are LED devices that can illuminate in arbitrary colors with
  * 8 bits of data for each of the red, green and blue channels.  These devices can be
