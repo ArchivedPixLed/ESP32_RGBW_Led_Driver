@@ -76,4 +76,4 @@ The complete C++ reference is available directly in the code, and online [there]
 # Have fun! :sheep: :rainbow:
 
 # Credits
-Original library and content of `components/cpp_utils` from [nkolban's repository](https://github.com/nkolban/esp32-snippets).
+Original `ws2812` library and content of `components/cpp_utils` from [nkolban's repository](https://github.com/nkolban/esp32-snippets).
