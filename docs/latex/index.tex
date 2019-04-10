@@ -1,0 +1,44 @@
+Driver for Strip/\+Neo\+Pixel data.\+Neo\+Pixels or Strips are L\+ED devices that can illuminate in arbitrary colors with 8 bits of data for each of the red, green and blue channels. These devices can be daisy chained together to produce a string of L\+E\+Ds. If we call each L\+ED instance a pixel, then when we want to set the value of a string of pixels, we need to supply the data for all the pixels. This class encapsulates setting the color value for an individual pixel within the string and, once you have set up all the desired colors, you can then set all the pixels in a show() operation. The class hides from you the underlying details needed to drive the devices.
+
+Currently, R\+GB Strips (\mbox{\hyperlink{classWS2812}{W\+S2812}} or Neo\+Pixels, \mbox{\hyperlink{classSK6812}{S\+K6812}}) and R\+G\+BW strips are supported. For R\+G\+BW strips, you can either drive manually the 4 leds (be careful to energy consumption if you set the 4 to high value) or drive them normally in R\+GB. If you do so, the color will be converted to R\+G\+BW for a \char`\"{}smart\char`\"{} white composant usage (from \href{https://stackoverflow.com/questions/40312216/converting-rgb-to-rgbw}{\texttt{ https\+://stackoverflow.\+com/questions/40312216/converting-\/rgb-\/to-\/rgbw}}). A simpler function is also available \+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{w = min(r, g, b)}
+\DoxyCodeLine{r, g, b = r - w, g - w, b - w}
+\end{DoxyCode}
+
+
+The choice between strip models is made instanciating the corresponding class. Then, functions to set pixels color and show them are equal.
+
+Example code to drive R\+G\+BW and R\+GB strips with the same commands \+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include <stdio.h>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "LedStrip.h"}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include "freertos/task.h"}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define WS2812\_PIN 14}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define SK6812\_PIN 12}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#define NUM\_LED 5}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{extern} \textcolor{stringliteral}{"C"} \{}
+\DoxyCodeLine{   \textcolor{keywordtype}{void} app\_main();}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keywordtype}{void} app\_main()}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \mbox{\hyperlink{classSK6812W}{SK6812W}} sk6812 = \mbox{\hyperlink{classSK6812W}{SK6812W}}((gpio\_num\_t) SK6812\_PIN, NUM\_LED, RMT\_CHANNEL\_0);}
+\DoxyCodeLine{  \mbox{\hyperlink{classWS2812}{WS2812}} ws2812 = \mbox{\hyperlink{classWS2812}{WS2812}}((gpio\_num\_t) WS2812\_PIN, NUM\_LED, RMT\_CHANNEL\_1);}
+\DoxyCodeLine{  \textcolor{keywordflow}{while}(1) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} h=0; h < 360; h++) \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i=0; i < NUM\_LED; i++) \{}
+\DoxyCodeLine{          sk6812.\mbox{\hyperlink{classRGBW__Strip_af6ee14cf6524b367d7c6390c2d3858da}{setHSBPixel}}(i, h, 0.8, 0.7);}
+\DoxyCodeLine{          ws2812.\mbox{\hyperlink{classRGB__Strip_a4f95a2aa9d7af3a68a546b54e51e27ed}{setHSBPixel}}(i, h, 0.8, 0.7);}
+\DoxyCodeLine{      \}}
+\DoxyCodeLine{      sk6812.\mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show}}();}
+\DoxyCodeLine{      ws2812.\mbox{\hyperlink{classRGB__Strip_a0cadc931b23e8d5f0ee4bfd8eac92e0b}{show}}();}
+\DoxyCodeLine{      vTaskDelay(50 / portTICK\_PERIOD\_MS);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{\}}
+\end{DoxyCode}
+ 

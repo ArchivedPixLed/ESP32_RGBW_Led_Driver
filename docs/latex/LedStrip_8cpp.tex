@@ -1,0 +1,87 @@
+\hypertarget{LedStrip_8cpp}{}\section{/home/paulbreugnot/\+Development/\+E\+S\+P32/workspace/led\+\_\+strip\+\_\+test/components/led\+\_\+strip\+\_\+driver/\+Led\+Strip.cpp File Reference}
+\label{LedStrip_8cpp}\index{/home/paulbreugnot/Development/ESP32/workspace/led\_strip\_test/components/led\_strip\_driver/LedStrip.cpp@{/home/paulbreugnot/Development/ESP32/workspace/led\_strip\_test/components/led\_strip\_driver/LedStrip.cpp}}
+{\ttfamily \#include $<$driver/rmt.\+h$>$}\newline
+{\ttfamily \#include $<$driver/gpio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include \char`\"{}G\+P\+I\+O.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}sdkconfig.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Led\+Strip.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structrgb__pixel}{rgb\+\_\+pixel}} \mbox{\hyperlink{LedStrip_8cpp_ae8542fcc9398190fd5f16e7553002d56}{H\+S\+Bto\+R\+GB}} (uint16\+\_\+t hue, double saturation, double brightness)
+\begin{DoxyCompactList}\small\item\em Converts the specified H\+SB color to an R\+GB color. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}} \mbox{\hyperlink{LedStrip_8cpp_a835c93fef5ce6d7ea31243a76aaa1ab2}{R\+G\+Bto\+R\+G\+B\+W1}} (uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue)
+\begin{DoxyCompactList}\small\item\em First method to convert R\+GB to R\+G\+BW. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}} \mbox{\hyperlink{LedStrip_8cpp_acc64637652469b5e3bb8ca25cd71675e}{R\+G\+Bto\+R\+G\+B\+W2}} (uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue)
+\begin{DoxyCompactList}\small\item\em Second method to convert R\+GB to R\+G\+BW. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{LedStrip_8cpp_a5a15759aec58cad10399cf7dff609865}\label{LedStrip_8cpp_a5a15759aec58cad10399cf7dff609865}} 
+static void {\bfseries set\+Terminator} (rmt\+\_\+item32\+\_\+t $\ast$p\+Item)
+\item 
+\mbox{\Hypertarget{LedStrip_8cpp_ace8d541c14b78d8bcd78d97b4b88ed37}\label{LedStrip_8cpp_ace8d541c14b78d8bcd78d97b4b88ed37}} 
+static uint8\+\_\+t {\bfseries get\+Channel\+Value\+By\+Type} (char type, \mbox{\hyperlink{structrgb__pixel}{rgb\+\_\+pixel}} pixel)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{LedStrip_8cpp_ae8542fcc9398190fd5f16e7553002d56}\label{LedStrip_8cpp_ae8542fcc9398190fd5f16e7553002d56}} 
+\index{LedStrip.cpp@{LedStrip.cpp}!HSBtoRGB@{HSBtoRGB}}
+\index{HSBtoRGB@{HSBtoRGB}!LedStrip.cpp@{LedStrip.cpp}}
+\subsubsection{\texorpdfstring{HSBtoRGB()}{HSBtoRGB()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{structrgb__pixel}{rgb\+\_\+pixel}} H\+S\+Bto\+R\+GB (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{hue,  }\item[{double}]{saturation,  }\item[{double}]{brightness }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts the specified H\+SB color to an R\+GB color. 
+
+param \mbox{[}in\mbox{]} hue, between 0 and 360 param \mbox{[}in\mbox{]} saturation, between 0 and 1 param \mbox{[}in\mbox{]} brightness, between 0 and 1 \mbox{\Hypertarget{LedStrip_8cpp_a835c93fef5ce6d7ea31243a76aaa1ab2}\label{LedStrip_8cpp_a835c93fef5ce6d7ea31243a76aaa1ab2}} 
+\index{LedStrip.cpp@{LedStrip.cpp}!RGBtoRGBW1@{RGBtoRGBW1}}
+\index{RGBtoRGBW1@{RGBtoRGBW1}!LedStrip.cpp@{LedStrip.cpp}}
+\subsubsection{\texorpdfstring{RGBtoRGBW1()}{RGBtoRGBW1()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}} R\+G\+Bto\+R\+G\+B\+W1 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{red,  }\item[{uint8\+\_\+t}]{green,  }\item[{uint8\+\_\+t}]{blue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+First method to convert R\+GB to R\+G\+BW. 
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{w = min(r, g, b)}
+\DoxyCodeLine{r, g, b = r - w, g - w, b - w}
+\end{DoxyCode}
+
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em red,between} & 0 and 255 \\
+\hline
+\mbox{\texttt{ in}}  & {\em green,between} & 0 and 255 \\
+\hline
+\mbox{\texttt{ in}}  & {\em blue,between} & 0 and 255 \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{LedStrip_8cpp_acc64637652469b5e3bb8ca25cd71675e}\label{LedStrip_8cpp_acc64637652469b5e3bb8ca25cd71675e}} 
+\index{LedStrip.cpp@{LedStrip.cpp}!RGBtoRGBW2@{RGBtoRGBW2}}
+\index{RGBtoRGBW2@{RGBtoRGBW2}!LedStrip.cpp@{LedStrip.cpp}}
+\subsubsection{\texorpdfstring{RGBtoRGBW2()}{RGBtoRGBW2()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}} R\+G\+Bto\+R\+G\+B\+W2 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{red,  }\item[{uint8\+\_\+t}]{green,  }\item[{uint8\+\_\+t}]{blue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Second method to convert R\+GB to R\+G\+BW. 
+
+Based on \href{https://stackoverflow.com/questions/40312216/converting-rgb-to-rgbw}{\texttt{ https\+://stackoverflow.\+com/questions/40312216/converting-\/rgb-\/to-\/rgbw}}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em red,between} & 0 and 255 \\
+\hline
+\mbox{\texttt{ in}}  & {\em green,between} & 0 and 255 \\
+\hline
+\mbox{\texttt{ in}}  & {\em blue,between} & 0 and 255 \\
+\hline
+\end{DoxyParams}

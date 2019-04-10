@@ -1,0 +1,255 @@
+\hypertarget{classRGBW__Strip}{}\section{R\+G\+B\+W\+\_\+\+Strip Class Reference}
+\label{classRGBW__Strip}\index{RGBW\_Strip@{RGBW\_Strip}}
+
+
+{\ttfamily \#include $<$Led\+Strip.\+h$>$}
+
+Inheritance diagram for R\+G\+B\+W\+\_\+\+Strip\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classRGBW__Strip}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classRGBW__Strip_a9d6003c75a32d2f9eec4af86caa1cea1}{R\+G\+B\+W\+\_\+\+Strip}} (gpio\+\_\+num\+\_\+t gpio\+Num, uint16\+\_\+t pixel\+Count, int channel, uint8\+\_\+t t0h, uint8\+\_\+t t0l, uint8\+\_\+t t1h, uint8\+\_\+t t1l)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classRGBW__Strip}{R\+G\+B\+W\+\_\+\+Strip}} constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_a8f9f94859f06a93b7230fd9db261897e}{set\+Pixel}} (uint16\+\_\+t index, uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue)
+\begin{DoxyCompactList}\small\item\em Set the given pixel to the specified color for R\+G\+BW strips. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_a8c4af9331a1d0c3c7bbef32fa7f12eea}{set\+Pixel}} (uint16\+\_\+t index, \mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}} pixel)
+\begin{DoxyCompactList}\small\item\em Set the given pixel to the specified color for R\+G\+BW strip. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_abb0bc96591def8495aa076695967dd30}{set\+Pixel}} (uint16\+\_\+t index, uint32\+\_\+t pixel)
+\begin{DoxyCompactList}\small\item\em Set the given pixel to the specified color for an R\+G\+BW strip. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_af6ee14cf6524b367d7c6390c2d3858da}{set\+H\+S\+B\+Pixel}} (uint16\+\_\+t index, uint16\+\_\+t hue, double saturation, double brightness)
+\begin{DoxyCompactList}\small\item\em Set the given pixel to the specified H\+SB color for an R\+G\+BW strip. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_a9eb7315c6558239653198503a892afc2}{set\+Pixel}} (uint16\+\_\+t index, uint8\+\_\+t red, uint8\+\_\+t green, uint8\+\_\+t blue, uint8\+\_\+t white)
+\begin{DoxyCompactList}\small\item\em Set the given pixel to the specified color for R\+G\+BW strips. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_ac429a3d07c38e87c91e35b7fbb5cc32c}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all the pixel colors for an R\+G\+BW strip. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show}} ()
+\begin{DoxyCompactList}\small\item\em Show the current pixel data for R\+G\+BW strips. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classRGBW__Strip_a37960460a546a371802dc728d10d8ee0}{set\+Rgb\+To\+Rgbw\+Converter}} (\mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}}($\ast$converter)(uint8\+\_\+t, uint8\+\_\+t, uint8\+\_\+t))
+\begin{DoxyCompactList}\small\item\em Sets the R\+GB to R\+G\+BW converter used for R\+G\+BW strips. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classRGBW__Strip_a59492df01f428786f6be940d806da9f4}\label{classRGBW__Strip_a59492df01f428786f6be940d806da9f4}} 
+virtual \mbox{\hyperlink{classRGBW__Strip_a59492df01f428786f6be940d806da9f4}{$\sim$\+R\+G\+B\+W\+\_\+\+Strip}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classRGBW__Strip}{R\+G\+B\+W\+\_\+\+Strip}} instance destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRGBW__Strip_a16a02f2b6b2484e3c4c56f40715523a7}\label{classRGBW__Strip_a16a02f2b6b2484e3c4c56f40715523a7}} 
+\mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}} $\ast$ {\bfseries pixels}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+R\+G\+BW strip class. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRGBW__Strip_a9d6003c75a32d2f9eec4af86caa1cea1}\label{classRGBW__Strip_a9d6003c75a32d2f9eec4af86caa1cea1}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!RGBW\_Strip@{RGBW\_Strip}}
+\index{RGBW\_Strip@{RGBW\_Strip}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{RGBW\_Strip()}{RGBW\_Strip()}}
+{\footnotesize\ttfamily R\+G\+B\+W\+\_\+\+Strip\+::\+R\+G\+B\+W\+\_\+\+Strip (\begin{DoxyParamCaption}\item[{gpio\+\_\+num\+\_\+t}]{gpio\+Num,  }\item[{uint16\+\_\+t}]{pixel\+Count,  }\item[{int}]{channel,  }\item[{uint8\+\_\+t}]{t0h,  }\item[{uint8\+\_\+t}]{t0l,  }\item[{uint8\+\_\+t}]{t1h,  }\item[{uint8\+\_\+t}]{t1l }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{classRGBW__Strip}{R\+G\+B\+W\+\_\+\+Strip}} constructor. 
+
+Notice that several strips can be connected, but they must be connected on different R\+MT channels. You shouldn\textquotesingle{}t need to call this class directly, but you can use it to drive other led strips not currently supported, with custom duration values.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em gpio\+Num,Led} & \mbox{\hyperlink{classStrip}{Strip}} G\+P\+IO. \\
+\hline
+\mbox{\texttt{ in}}  & {\em pixel\+Count,Number} & of leds. \\
+\hline
+\mbox{\texttt{ in}}  & {\em channel,R\+MT} & channel to use. See \href{https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html\#enumerations}{\texttt{ https\+://docs.\+espressif.\+com/projects/esp-\/idf/en/latest/api-\/reference/peripherals/rmt.\+html\#enumerations}} \\
+\hline
+\mbox{\texttt{ in}}  & {\em t0h,high} & value duration for bit 0, expressed in R\+MT ticks. \\
+\hline
+\mbox{\texttt{ in}}  & {\em t0l,low} & value duration for bit 0, expressed in R\+MT ticks. \\
+\hline
+\mbox{\texttt{ in}}  & {\em t1h,high} & value duration for bit 1, expressed in R\+MT ticks. \\
+\hline
+\mbox{\texttt{ in}}  & {\em t1l,low} & value duration for bit 0, expressed in R\+MT ticks. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classRGBW__Strip_ac429a3d07c38e87c91e35b7fbb5cc32c}\label{classRGBW__Strip_ac429a3d07c38e87c91e35b7fbb5cc32c}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!clear@{clear}}
+\index{clear@{clear}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Clear all the pixel colors for an R\+G\+BW strip. 
+
+This sets all the pixels to off which is no brightness for all of the color channels. The L\+E\+Ds are not actually updated until a call to \mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show()}}. 
+
+Implements \mbox{\hyperlink{classStrip}{Strip}}.
+
+\mbox{\Hypertarget{classRGBW__Strip_af6ee14cf6524b367d7c6390c2d3858da}\label{classRGBW__Strip_af6ee14cf6524b367d7c6390c2d3858da}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!setHSBPixel@{setHSBPixel}}
+\index{setHSBPixel@{setHSBPixel}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{setHSBPixel()}{setHSBPixel()}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::set\+H\+S\+B\+Pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{index,  }\item[{uint16\+\_\+t}]{hue,  }\item[{double}]{saturation,  }\item[{double}]{brightness }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the given pixel to the specified H\+SB color for an R\+G\+BW strip. 
+
+Compute the R\+GB value from H\+SB, and then the R\+G\+BW value from R\+GB.
+
+The L\+E\+Ds are not actually updated until a call to \mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show()}}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index} & The pixel that is to have its color set. \\
+\hline
+\mbox{\texttt{ in}}  & {\em hue} & The amount of hue in the pixel (0-\/360). \\
+\hline
+\mbox{\texttt{ in}}  & {\em saturation} & The amount of saturation in the pixel (0-\/1). \\
+\hline
+\mbox{\texttt{ in}}  & {\em brightness} & The amount of brightness in the pixel (0-\/1). \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classStrip}{Strip}}.
+
+\mbox{\Hypertarget{classRGBW__Strip_a8f9f94859f06a93b7230fd9db261897e}\label{classRGBW__Strip_a8f9f94859f06a93b7230fd9db261897e}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!setPixel@{setPixel}}
+\index{setPixel@{setPixel}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{setPixel()}{setPixel()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::set\+Pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{index,  }\item[{uint8\+\_\+t}]{red,  }\item[{uint8\+\_\+t}]{green,  }\item[{uint8\+\_\+t}]{blue }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the given pixel to the specified color for R\+G\+BW strips. 
+
+The R\+G\+Bto\+R\+G\+BW converter is used to convert from R\+GB to R\+G\+BW.
+
+The L\+E\+Ds are not actually updated until a call to \mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show()}}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index,The} & pixel that is to have its color set. \\
+\hline
+\mbox{\texttt{ in}}  & {\em red,The} & amount of red in the pixel, between 0 and 255. \\
+\hline
+\mbox{\texttt{ in}}  & {\em green,The} & amount of green in the pixel, between 0 and 255. \\
+\hline
+\mbox{\texttt{ in}}  & {\em blue,The} & amount of blue in the pixel, between 0 and 255. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classStrip}{Strip}}.
+
+\mbox{\Hypertarget{classRGBW__Strip_a8c4af9331a1d0c3c7bbef32fa7f12eea}\label{classRGBW__Strip_a8c4af9331a1d0c3c7bbef32fa7f12eea}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!setPixel@{setPixel}}
+\index{setPixel@{setPixel}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{setPixel()}{setPixel()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::set\+Pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{index,  }\item[{\mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}}}]{pixel }\end{DoxyParamCaption})}
+
+
+
+Set the given pixel to the specified color for R\+G\+BW strip. 
+
+The L\+E\+Ds are not actually updated until a call to \mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show()}}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index} & The pixel that is to have its color set. \\
+\hline
+\mbox{\texttt{ in}}  & {\em pixel} & The R\+G\+BW color value of the pixel. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGBW__Strip_abb0bc96591def8495aa076695967dd30}\label{classRGBW__Strip_abb0bc96591def8495aa076695967dd30}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!setPixel@{setPixel}}
+\index{setPixel@{setPixel}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{setPixel()}{setPixel()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::set\+Pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{index,  }\item[{uint32\+\_\+t}]{pixel }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Set the given pixel to the specified color for an R\+G\+BW strip. 
+
+The L\+E\+Ds are not actually updated until a call to \mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show()}}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index,The} & pixel that is to have its color set. \\
+\hline
+\mbox{\texttt{ in}}  & {\em pixel,The} & R\+G\+BW color value of the pixel. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classStrip}{Strip}}.
+
+\mbox{\Hypertarget{classRGBW__Strip_a9eb7315c6558239653198503a892afc2}\label{classRGBW__Strip_a9eb7315c6558239653198503a892afc2}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!setPixel@{setPixel}}
+\index{setPixel@{setPixel}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{setPixel()}{setPixel()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::set\+Pixel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{index,  }\item[{uint8\+\_\+t}]{red,  }\item[{uint8\+\_\+t}]{green,  }\item[{uint8\+\_\+t}]{blue,  }\item[{uint8\+\_\+t}]{white }\end{DoxyParamCaption})}
+
+
+
+Set the given pixel to the specified color for R\+G\+BW strips. 
+
+The L\+E\+Ds are not actually updated until a call to \mbox{\hyperlink{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}{show()}}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em index,The} & pixel that is to have its color set. \\
+\hline
+\mbox{\texttt{ in}}  & {\em red,The} & amount of red in the pixel, between 0 and 255. \\
+\hline
+\mbox{\texttt{ in}}  & {\em green,The} & amount of green in the pixel, between 0 and 255. \\
+\hline
+\mbox{\texttt{ in}}  & {\em blue,The} & amount of blue in the pixel, between 0 and 255. \\
+\hline
+\mbox{\texttt{ in}}  & {\em white,The} & amount of white in the pixel, between 0 and 255. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGBW__Strip_a37960460a546a371802dc728d10d8ee0}\label{classRGBW__Strip_a37960460a546a371802dc728d10d8ee0}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!setRgbToRgbwConverter@{setRgbToRgbwConverter}}
+\index{setRgbToRgbwConverter@{setRgbToRgbwConverter}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{setRgbToRgbwConverter()}{setRgbToRgbwConverter()}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::set\+Rgb\+To\+Rgbw\+Converter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structrgbw__pixel}{rgbw\+\_\+pixel}}($\ast$)(uint8\+\_\+t, uint8\+\_\+t, uint8\+\_\+t)}]{converter }\end{DoxyParamCaption})}
+
+
+
+Sets the R\+GB to R\+G\+BW converter used for R\+G\+BW strips. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em converter,reference} & to the converter function. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}\label{classRGBW__Strip_a6951fd2265c832e98c9f02b5d3fb4af6}} 
+\index{RGBW\_Strip@{RGBW\_Strip}!show@{show}}
+\index{show@{show}!RGBW\_Strip@{RGBW\_Strip}}
+\subsubsection{\texorpdfstring{show()}{show()}}
+{\footnotesize\ttfamily void R\+G\+B\+W\+\_\+\+Strip\+::show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Show the current pixel data for R\+G\+BW strips. 
+
+Drive the L\+E\+Ds with the values that were previously set. 
+
+Implements \mbox{\hyperlink{classStrip}{Strip}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/paulbreugnot/\+Development/\+E\+S\+P32/workspace/led\+\_\+strip\+\_\+test/components/led\+\_\+strip\+\_\+driver/include/Led\+Strip.\+h\item 
+/home/paulbreugnot/\+Development/\+E\+S\+P32/workspace/led\+\_\+strip\+\_\+test/components/led\+\_\+strip\+\_\+driver/\mbox{\hyperlink{LedStrip_8cpp}{Led\+Strip.\+cpp}}\end{DoxyCompactItemize}
