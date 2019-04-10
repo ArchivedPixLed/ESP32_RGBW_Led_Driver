@@ -347,9 +347,11 @@ RGBW_Strip::RGBW_Strip(gpio_num_t gpioNum, uint16_t pixelCount, int channel, uin
 		this->pixels     = new rgbw_pixel[pixelCount];
 		this->items      = new rmt_item32_t[pixelCount * 32 + 1];
 		if (RGB_TO_RGBW_1) {
+			ESP_LOGI(LOG_TAG, "RGB_TO_RGBW_1 selected");
 			this->rgb2rgbwConverter = RGBtoRGBW1;
 		}
  	  else if (RGB_TO_RGBW_2) {
+			ESP_LOGI(LOG_TAG, "RGB_TO_RGBW_2 selected");
 			this->rgb2rgbwConverter = RGBtoRGBW2;
 		}
 		clear();

@@ -3,6 +3,6 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := led_strip_test
+PROJECT_NAME := esp32_rgbw_led_driver
 
 include $(IDF_PATH)/make/project.mk
