@@ -32,6 +32,8 @@ void app_main() {
 
 You can also directly use this repository as a project.
 
+To be able to compile C++, you also need to "Enable C++ exceptions", as the esp-idf compiler will recall you. To do so : `make menuconfig` -> `Compiler options` -> `Enable C++ exceptions` (use `space` to select)
+
 ### 4. Copy libraries in your own project
 
 Copy the content of the `components` folder in the `components` directory of your own project.
