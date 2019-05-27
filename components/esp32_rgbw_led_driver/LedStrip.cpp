@@ -26,7 +26,7 @@
  */
 
 /**
- * @fn static rgb_pixel HSBtoRGB(uint16_t hue, double saturation, double brightness)
+ * @fn static rgb_pixel HSBtoRGB(float hue, float saturation, float brightness)
  *
  * @brief Converts the specified HSB color to an RGB color.
  *
@@ -34,13 +34,13 @@
  * param [in] saturation, between 0 and 1
  * param [in] brightness, between 0 and 1
  */
-static rgb_pixel HSBtoRGB(uint16_t hue, double saturation, double brightness) {
+static rgb_pixel HSBtoRGB(float hue, float saturation, float brightness) {
 
 	double      hh, p, q, t, ff;
 	long        i;
 	double      r_out;
-	double 			g_out;
-	double 			b_out;
+	double      g_out;
+	double 	    b_out;
 
 	if(saturation <= 0.0) {       // < is bogus, just shuts up warnings
 			r_out = brightness;
@@ -662,7 +662,7 @@ void RGBW_Strip::setPixel(uint16_t index, uint32_t pixel) {
  * @param [in] saturation, The amount of saturation in the pixel (0-1).
  * @param [in] brightness, The amount of brightness in the pixel (0-1).
  */
-void RGB_Strip::setHSBPixel(uint16_t index, uint16_t hue, double saturation, double brightness) {
+void RGB_Strip::setHSBPixel(uint16_t index, float hue, float saturation, float brightness) {
 	assert(index < pixelCount);
 	this->pixels[index] = HSBtoRGB(hue, saturation, brightness);
 } // setHSBPixel
@@ -679,7 +679,7 @@ void RGB_Strip::setHSBPixel(uint16_t index, uint16_t hue, double saturation, dou
  * @param [in] saturation The amount of saturation in the pixel (0-1).
  * @param [in] brightness The amount of brightness in the pixel (0-1).
  */
-void RGBW_Strip::setHSBPixel(uint16_t index, uint16_t hue, double saturation, double brightness) {
+void RGBW_Strip::setHSBPixel(uint16_t index, float hue, float saturation, float brightness) {
 	assert(index < pixelCount);
 
 	rgb_pixel _rgb_pixel = HSBtoRGB(hue, saturation, brightness);

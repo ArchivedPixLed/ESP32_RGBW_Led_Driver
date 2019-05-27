@@ -143,6 +143,28 @@ struct rgbw_pixel : rgb_pixel {
 };
 
 /**
+ * @brief A data type representing an HSB pixel.
+ */
+struct hsb_pixel {
+	hsb_pixel();
+	hsb_pixel(float hue, float saturation, float brightness);
+	/**
+	 * @brief Color hue, in [0;360]
+	 */
+	float hue;
+
+	/**
+	 * @brief Color saturation, in [0;1]
+	 */
+	float saturation;
+
+	/**
+	 * @brief Color brightness, in [0;1]
+	 */
+	float brightness;
+};
+
+/**
  * @brief General and abstract led Strip class.
  */
 class Strip {
@@ -152,7 +174,7 @@ public:
 	void setColorOrder(char* order);
 	virtual void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue) = 0;
 	virtual void setPixel(uint16_t index, uint32_t pixel) = 0;
-	virtual void setHSBPixel(uint16_t index, uint16_t hue, double saturation, double brightness) = 0;
+	virtual void setHSBPixel(uint16_t index, float hue, float saturation, float brightness) = 0;
 	virtual void clear() = 0;
 	virtual ~Strip();
 	uint16_t       pixelCount;
@@ -182,7 +204,7 @@ public:
 	void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
 	void setPixel(uint16_t index, rgb_pixel pixel);
 	void setPixel(uint16_t index, uint32_t pixel);
-	void setHSBPixel(uint16_t index, uint16_t hue, double saturation, double brightness);
+	void setHSBPixel(uint16_t index, float hue, float saturation, float brightness);
 	void clear();
 	void show();
 	virtual ~RGB_Strip();
@@ -198,7 +220,7 @@ public:
 	void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
 	void setPixel(uint16_t index, rgbw_pixel pixel);
 	void setPixel(uint16_t index, uint32_t pixel);
-	void setHSBPixel(uint16_t index, uint16_t hue, double saturation, double brightness);
+	void setHSBPixel(uint16_t index, float hue, float saturation, float brightness);
 	void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue, uint8_t white);
 	void clear();
 	void show();
