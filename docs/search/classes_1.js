@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['sk6812',['SK6812',['../classSK6812.html',1,'']]],
-  ['sk6812w',['SK6812W',['../classSK6812W.html',1,'']]],
-  ['strip',['Strip',['../classStrip.html',1,'']]]
+  ['rgb_5fpixel',['rgb_pixel',['../structrgb__pixel.html',1,'']]],
+  ['rgb_5fstrip',['RGB_Strip',['../classRGB__Strip.html',1,'']]],
+  ['rgbw_5fpixel',['rgbw_pixel',['../structrgbw__pixel.html',1,'']]],
+  ['rgbw_5fstrip',['RGBW_Strip',['../classRGBW__Strip.html',1,'']]]
 ];

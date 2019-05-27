@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['white',['white',['../structrgbw__pixel.html#a3134dfea8e33b3bf1aca1b834f2bf0a8',1,'rgbw_pixel']]]
+  ['red',['red',['../structrgb__pixel.html#a1f2df0e809c6ae17e69a61ab9bf75a19',1,'rgb_pixel']]]
 ];
