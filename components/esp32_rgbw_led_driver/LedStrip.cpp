@@ -205,6 +205,28 @@ static rgbw_pixel RGBtoRGBW2(uint8_t red, uint8_t green, uint8_t blue) {
  }
 
 /**
+ * @brieg hsb_pixel constructor
+ *
+ * @param[in] hue, between 0 and 360
+ * @param[in] saturation, between 0 and 1
+ * @param[in] brightness, between 0 and 1
+ */
+hsb_pixel::hsb_pixel(float hue, float saturation, float brightness)
+{
+	this->hue = hue;
+	this->saturation = saturation;
+	this->brightness = brightness;
+}
+
+/**
+ * @brief hesb_pixel default constructor.
+ */
+hsb_pixel::hsb_pixel()
+{
+	hsb_pixel(0, 0, 0);
+}
+
+/**
  * @brief Set up RMT strip value 1.
  *
  * Set two levels of RMT output to the Neopixel value for a "1".
@@ -666,6 +688,37 @@ void RGB_Strip::setHSBPixel(uint16_t index, float hue, float saturation, float b
 	assert(index < pixelCount);
 	this->pixels[index] = HSBtoRGB(hue, saturation, brightness);
 } // setHSBPixel
+
+/**
+ * @brief Set the given pixel to the specified HSB color for an RGB strip.
+ *
+ * The LEDs are not actually updated until a call to show().
+ *
+ * @param [in] index, The pixel that is to have its color set.
+ * @param [in] hsb_pixel, HSB colors.
+ */
+void RGB_Strip::setHSBPixel(uint16_t index, hsb_pixel hsb_pixel) {
+	assert(index < pixelCount);
+	this->pixels[index] = HSBtoRGB(hsb_pixel.hue, hsb_pixel.saturation, hsb_pixel.brightness);
+} // setHSBPixel
+
+/**
+ * @brief Set the given pixel to the specified HSB color for an RGBW strip.
+ *
+ * Compute the RGB value from HSB, and then the RGBW value from RGB.
+ *
+ * The LEDs are not actually updated until a call to show().
+ *
+ * @param [in] index The pixel that is to have its color set.
+ * @param [in] hsb_pixel, HSB colors.
+ */
+void RGBW_Strip::setHSBPixel(uint16_t index, hsb_pixel hsb_pixel) {
+	assert(index < pixelCount);
+
+	rgb_pixel _rgb_pixel = HSBtoRGB(hsb_pixel.hue, hsb_pixel.saturation, hsb_pixel.brightness);
+	this->pixels[index] = this->rgb2rgbwConverter(_rgb_pixel.red, _rgb_pixel.green, _rgb_pixel.blue);
+} // setHSBPixel
+
 
 /**
  * @brief Set the given pixel to the specified HSB color for an RGBW strip.

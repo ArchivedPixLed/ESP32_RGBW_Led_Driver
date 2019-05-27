@@ -103,6 +103,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a25e7b2c061f21f544e181773180bc162"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGB__Strip.html#a25e7b2c061f21f544e181773180bc162">setHSBPixel</a> (uint16_t index, float hue, float saturation, float brightness)</td></tr>
 <tr class="memdesc:a25e7b2c061f21f544e181773180bc162"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified HSB color for an RGB strip.  <a href="#a25e7b2c061f21f544e181773180bc162">More...</a><br /></td></tr>
 <tr class="separator:a25e7b2c061f21f544e181773180bc162"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae16097660ec02efff757641383154f5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGB__Strip.html#aae16097660ec02efff757641383154f5">setHSBPixel</a> (uint16_t index, <a class="el" href="structhsb__pixel.html">hsb_pixel</a> pixel)</td></tr>
+<tr class="memdesc:aae16097660ec02efff757641383154f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified HSB color for an RGB strip.  <a href="#aae16097660ec02efff757641383154f5">More...</a><br /></td></tr>
+<tr class="separator:aae16097660ec02efff757641383154f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68257e7b8afda71ad51b862b428e3e63"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGB__Strip.html#a68257e7b8afda71ad51b862b428e3e63">clear</a> ()</td></tr>
 <tr class="memdesc:a68257e7b8afda71ad51b862b428e3e63"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear all the pixel colors for an RGB strip.  <a href="#a68257e7b8afda71ad51b862b428e3e63">More...</a><br /></td></tr>
 <tr class="separator:a68257e7b8afda71ad51b862b428e3e63"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -275,7 +278,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div>
 </div>
 <a id="a25e7b2c061f21f544e181773180bc162"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a25e7b2c061f21f544e181773180bc162">&#9670;&nbsp;</a></span>setHSBPixel()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a25e7b2c061f21f544e181773180bc162">&#9670;&nbsp;</a></span>setHSBPixel() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -328,6 +331,54 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">hue,The</td><td>amount of hue in the pixel (0-360). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">saturation,The</td><td>amount of saturation in the pixel (0-1). </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">brightness,The</td><td>amount of brightness in the pixel (0-1). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classStrip.html">Strip</a>.</p>
+
+</div>
+</div>
+<a id="aae16097660ec02efff757641383154f5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae16097660ec02efff757641383154f5">&#9670;&nbsp;</a></span>setHSBPixel() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGB_Strip::setHSBPixel </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structhsb__pixel.html">hsb_pixel</a>&#160;</td>
+          <td class="paramname"><em>hsb_pixel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the given pixel to the specified HSB color for an RGB strip. </p>
+<p>The LEDs are not actually updated until a call to <a class="el" href="classRGB__Strip.html#a0cadc931b23e8d5f0ee4bfd8eac92e0b" title="Show the current pixel data for RGB strips.">show()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">index,The</td><td>pixel that is to have its color set. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="structhsb__pixel.html" title="A data type representing an HSB pixel.">hsb_pixel</a>,HSB</td><td>colors. </td></tr>
   </table>
   </dd>
 </dl>

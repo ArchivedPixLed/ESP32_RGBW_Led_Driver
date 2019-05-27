@@ -175,6 +175,7 @@ public:
 	virtual void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue) = 0;
 	virtual void setPixel(uint16_t index, uint32_t pixel) = 0;
 	virtual void setHSBPixel(uint16_t index, float hue, float saturation, float brightness) = 0;
+	virtual void setHSBPixel(uint16_t index, hsb_pixel pixel) = 0;
 	virtual void clear() = 0;
 	virtual ~Strip();
 	uint16_t       pixelCount;
@@ -205,6 +206,7 @@ public:
 	void setPixel(uint16_t index, rgb_pixel pixel);
 	void setPixel(uint16_t index, uint32_t pixel);
 	void setHSBPixel(uint16_t index, float hue, float saturation, float brightness);
+	void setHSBPixel(uint16_t index, hsb_pixel pixel);
 	void clear();
 	void show();
 	virtual ~RGB_Strip();
@@ -221,6 +223,7 @@ public:
 	void setPixel(uint16_t index, rgbw_pixel pixel);
 	void setPixel(uint16_t index, uint32_t pixel);
 	void setHSBPixel(uint16_t index, float hue, float saturation, float brightness);
+	void setHSBPixel(uint16_t index, hsb_pixel pixel);
 	void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue, uint8_t white);
 	void clear();
 	void show();
