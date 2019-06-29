@@ -31,10 +31,10 @@
 #define WS2812_T1L 600
 
 // RGB WS2815
-#define WS2815_T0H 250
-#define WS2815_T0L 600
-#define WS2815_T1H 600
-#define WS2815_T1L 250
+#define WS2815_T0H 300
+#define WS2815_T0L 800
+#define WS2815_T1H 800
+#define WS2815_T1L 300
 
 // RGB SK6812
 #define SK6812_T0H 300
