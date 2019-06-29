@@ -30,6 +30,12 @@
 #define WS2812_T1H 700
 #define WS2812_T1L 600
 
+// RGB WS2815
+#define WS2815_T0H 220
+#define WS2815_T0L 580
+#define WS2815_T1H 580
+#define WS2815_T1L 220
+
 // RGB SK6812
 #define SK6812_T0H 300
 #define SK6812_T0L 900
@@ -241,6 +247,14 @@ private:
 class WS2812: public RGB_Strip {
 public:
 	WS2812(gpio_num_t gpioNum, uint16_t pixelCount, int channel);
+};
+
+/**
+ * @brief WS2815 RGB strip implementation.
+ */
+class WS2815: public RGB_Strip {
+public:
+	WS2815(gpio_num_t gpioNum, uint16_t pixelCount, int channel);
 };
 
 /**

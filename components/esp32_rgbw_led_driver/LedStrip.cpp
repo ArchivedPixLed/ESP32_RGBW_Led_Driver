@@ -337,6 +337,27 @@ WS2812::WS2812(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
 	};
 
 /**
+* @brief WS2815 (RGB) constructor.
+*
+* @param[in] gpioNum, Led Strip GPIO.
+* @param[in] pixelCount, Number of leds.
+* @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+*
+*/
+WS2815::WS2815(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
+	RGB_Strip(
+		gpioNum,
+		pixelCount,
+		channel,
+		WS2815_T0H * RMT_RATIO,
+		WS2815_T0L * RMT_RATIO,
+		WS2815_T1H * RMT_RATIO,
+		WS2815_T1L * RMT_RATIO
+	){
+		this->colorOrder = (char*) "GRB";
+	};
+
+/**
 *	@brief SK6812 (RGB) constructor.
 *
 * @param[in] gpioNum, Led Strip GPIO.
