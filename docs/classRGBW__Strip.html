@@ -90,6 +90,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f9f94859f06a93b7230fd9db261897e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGBW__Strip.html#a8f9f94859f06a93b7230fd9db261897e">setPixel</a> (uint16_t index, uint8_t red, uint8_t green, uint8_t blue)</td></tr>
 <tr class="memdesc:a8f9f94859f06a93b7230fd9db261897e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified color for RGBW strips.  <a href="#a8f9f94859f06a93b7230fd9db261897e">More...</a><br /></td></tr>
 <tr class="separator:a8f9f94859f06a93b7230fd9db261897e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a341e3b1a569f97dbf8041201cdb98a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGBW__Strip.html#a1a341e3b1a569f97dbf8041201cdb98a">setPixel</a> (uint16_t index, <a class="el" href="structrgb__pixel.html">rgb_pixel</a> pixel)</td></tr>
+<tr class="memdesc:a1a341e3b1a569f97dbf8041201cdb98a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified color for RGBW strips.  <a href="#a1a341e3b1a569f97dbf8041201cdb98a">More...</a><br /></td></tr>
+<tr class="separator:a1a341e3b1a569f97dbf8041201cdb98a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c4af9331a1d0c3c7bbef32fa7f12eea"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGBW__Strip.html#a8c4af9331a1d0c3c7bbef32fa7f12eea">setPixel</a> (uint16_t index, <a class="el" href="structrgbw__pixel.html">rgbw_pixel</a> pixel)</td></tr>
 <tr class="memdesc:a8c4af9331a1d0c3c7bbef32fa7f12eea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified color for RGBW strip.  <a href="#a8c4af9331a1d0c3c7bbef32fa7f12eea">More...</a><br /></td></tr>
 <tr class="separator:a8c4af9331a1d0c3c7bbef32fa7f12eea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -235,13 +238,13 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>Notice that several strips can be connected, but they must be connected on different RMT channels. You shouldn't need to call this class directly, but you can use it to drive other led strips not currently supported, with custom duration values.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">gpioNum,Led</td><td><a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> GPIO. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pixelCount,Number</td><td>of leds. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">channel,RMT</td><td>channel to use. See <a href="https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations">https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t0h,high</td><td>value duration for bit 0, expressed in RMT ticks. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t0l,low</td><td>value duration for bit 0, expressed in RMT ticks. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t1h,high</td><td>value duration for bit 1, expressed in RMT ticks. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t1l,low</td><td>value duration for bit 0, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">gpioNum</td><td>Led <a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> GPIO. </td></tr>
+    <tr><td class="paramname">pixelCount</td><td>Number of leds. </td></tr>
+    <tr><td class="paramname">channel</td><td>RMT channel to use. See <a href="https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations">https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations</a> </td></tr>
+    <tr><td class="paramname">t0h</td><td>high value duration for bit 0, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">t0l</td><td>low value duration for bit 0, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">t1h</td><td>high value duration for bit 1, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">t1l</td><td>low value duration for bit 0, expressed in RMT ticks. </td></tr>
   </table>
   </dd>
 </dl>
@@ -330,10 +333,10 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>The LEDs are not actually updated until a call to <a class="el" href="classRGBW__Strip.html#a6951fd2265c832e98c9f02b5d3fb4af6" title="Show the current pixel data for RGBW strips.">show()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">hue</td><td>The amount of hue in the pixel (0-360). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">saturation</td><td>The amount of saturation in the pixel (0-1). </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">brightness</td><td>The amount of brightness in the pixel (0-1). </td></tr>
+    <tr><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
+    <tr><td class="paramname">hue</td><td>The amount of hue in the pixel (0-360). </td></tr>
+    <tr><td class="paramname">saturation</td><td>The amount of saturation in the pixel (0-1). </td></tr>
+    <tr><td class="paramname">brightness</td><td>The amount of brightness in the pixel (0-1). </td></tr>
   </table>
   </dd>
 </dl>
@@ -381,8 +384,8 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>The LEDs are not actually updated until a call to <a class="el" href="classRGBW__Strip.html#a6951fd2265c832e98c9f02b5d3fb4af6" title="Show the current pixel data for RGBW strips.">show()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname"><a class="el" href="structhsb__pixel.html" title="A data type representing an HSB pixel.">hsb_pixel</a>,HSB</td><td>colors. </td></tr>
+    <tr><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
+    <tr><td class="paramname"><a class="el" href="structhsb__pixel.html" title="A data type representing an HSB pixel.">hsb_pixel</a></td><td>HSB colors. </td></tr>
   </table>
   </dd>
 </dl>
@@ -392,7 +395,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div>
 </div>
 <a id="a8f9f94859f06a93b7230fd9db261897e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8f9f94859f06a93b7230fd9db261897e">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f9f94859f06a93b7230fd9db261897e">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,10 +445,59 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>The LEDs are not actually updated until a call to <a class="el" href="classRGBW__Strip.html#a6951fd2265c832e98c9f02b5d3fb4af6" title="Show the current pixel data for RGBW strips.">show()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index,The</td><td>pixel that is to have its color set. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">red,The</td><td>amount of red in the pixel, between 0 and 255. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">green,The</td><td>amount of green in the pixel, between 0 and 255. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">blue,The</td><td>amount of blue in the pixel, between 0 and 255. </td></tr>
+    <tr><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
+    <tr><td class="paramname">red</td><td>The amount of red in the pixel, between 0 and 255. </td></tr>
+    <tr><td class="paramname">green</td><td>The amount of green in the pixel, between 0 and 255. </td></tr>
+    <tr><td class="paramname">blue</td><td>The amount of blue in the pixel, between 0 and 255. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implements <a class="el" href="classStrip.html">Strip</a>.</p>
+
+</div>
+</div>
+<a id="a1a341e3b1a569f97dbf8041201cdb98a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a341e3b1a569f97dbf8041201cdb98a">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RGBW_Strip::setPixel </td>
+          <td>(</td>
+          <td class="paramtype">uint16_t&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="structrgb__pixel.html">rgb_pixel</a>&#160;</td>
+          <td class="paramname"><em>pixel</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the given pixel to the specified color for RGBW strips. </p>
+<p>The RGBtoRGBW converter is used to convert from RGB to RGBW.</p>
+<p>The LEDs are not actually updated until a call to <a class="el" href="classRGBW__Strip.html#a6951fd2265c832e98c9f02b5d3fb4af6" title="Show the current pixel data for RGBW strips.">show()</a>.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
+    <tr><td class="paramname">pixel</td><td>rgb pixel </td></tr>
   </table>
   </dd>
 </dl>
@@ -455,7 +507,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div>
 </div>
 <a id="a8c4af9331a1d0c3c7bbef32fa7f12eea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c4af9331a1d0c3c7bbef32fa7f12eea">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c4af9331a1d0c3c7bbef32fa7f12eea">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -484,8 +536,8 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>The LEDs are not actually updated until a call to <a class="el" href="classRGBW__Strip.html#a6951fd2265c832e98c9f02b5d3fb4af6" title="Show the current pixel data for RGBW strips.">show()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pixel</td><td>The RGBW color value of the pixel. </td></tr>
+    <tr><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
+    <tr><td class="paramname">pixel</td><td>The RGBW color value of the pixel. </td></tr>
   </table>
   </dd>
 </dl>
@@ -493,7 +545,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div>
 </div>
 <a id="abb0bc96591def8495aa076695967dd30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb0bc96591def8495aa076695967dd30">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abb0bc96591def8495aa076695967dd30">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -530,8 +582,8 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>The LEDs are not actually updated until a call to <a class="el" href="classRGBW__Strip.html#a6951fd2265c832e98c9f02b5d3fb4af6" title="Show the current pixel data for RGBW strips.">show()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index,The</td><td>pixel that is to have its color set. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pixel,The</td><td>RGBW color value of the pixel. </td></tr>
+    <tr><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
+    <tr><td class="paramname">pixel</td><td>The RGBW color value of the pixel. </td></tr>
   </table>
   </dd>
 </dl>
@@ -541,7 +593,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div>
 </div>
 <a id="a9eb7315c6558239653198503a892afc2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9eb7315c6558239653198503a892afc2">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9eb7315c6558239653198503a892afc2">&#9670;&nbsp;</a></span>setPixel() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -588,11 +640,11 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>The LEDs are not actually updated until a call to <a class="el" href="classRGBW__Strip.html#a6951fd2265c832e98c9f02b5d3fb4af6" title="Show the current pixel data for RGBW strips.">show()</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">index,The</td><td>pixel that is to have its color set. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">red,The</td><td>amount of red in the pixel, between 0 and 255. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">green,The</td><td>amount of green in the pixel, between 0 and 255. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">blue,The</td><td>amount of blue in the pixel, between 0 and 255. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">white,The</td><td>amount of white in the pixel, between 0 and 255. </td></tr>
+    <tr><td class="paramname">index</td><td>The pixel that is to have its color set. </td></tr>
+    <tr><td class="paramname">red</td><td>The amount of red in the pixel, between 0 and 255. </td></tr>
+    <tr><td class="paramname">green</td><td>The amount of green in the pixel, between 0 and 255. </td></tr>
+    <tr><td class="paramname">blue</td><td>The amount of blue in the pixel, between 0 and 255. </td></tr>
+    <tr><td class="paramname">white</td><td>The amount of white in the pixel, between 0 and 255. </td></tr>
   </table>
   </dd>
 </dl>
@@ -618,7 +670,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>Sets the RGB to RGBW converter used for RGBW strips. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">converter,reference</td><td>to the converter function. </td></tr>
+    <tr><td class="paramname">converter</td><td>reference to the converter function. </td></tr>
   </table>
   </dd>
 </dl>
@@ -657,7 +709,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>components/esp32_rgbw_led_driver/include/<a class="el" href="LedStrip_8h_source.html">LedStrip.h</a></li>
-<li>components/esp32_rgbw_led_driver/<a class="el" href="LedStrip_8cpp.html">LedStrip.cpp</a></li>
+<li>components/esp32_rgbw_led_driver/LedStrip.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,10 +1,6 @@
 #include <driver/rmt.h>
 #include <driver/gpio.h>
-#include <stdint.h>
-#include <stdlib.h>
 #include <string.h>
-#include <stdexcept>
-#include <algorithm>
 
 #include "GPIO.h"
 #include "sdkconfig.h"
@@ -13,158 +9,14 @@
 #if CONFIG_CXX_EXCEPTIONS != 1
 #error "C++ exception handling must be enabled within make menuconfig. See Compiler Options > Enable C++ Exceptions."
 #endif
-/**
- * @file LedStrip.cpp
- *
- * Two functions, RGBtoRGBW1 and RGBtoRGBW2, are available to convert RGB
- * components to RGBW components.
- *
- * By default, RGBtoRGBW2 is used. You can set up the function :
- *  - at compile time, with Make Menuconfig => Component config => Led Strip Config
- *  - at runtime, see RGBW_Strip::setRgbToRgbwConverter
- *
- */
 
-/**
- * @fn static rgb_pixel HSBtoRGB(float hue, float saturation, float brightness)
- *
- * @brief Converts the specified HSB color to an RGB color.
- *
- * param [in] hue, between 0 and 360
- * param [in] saturation, between 0 and 1
- * param [in] brightness, between 0 and 1
- */
-static rgb_pixel HSBtoRGB(float hue, float saturation, float brightness) {
-
-	double      hh, p, q, t, ff;
-	long        i;
-	double      r_out;
-	double      g_out;
-	double 	    b_out;
-
-	if(saturation <= 0.0) {       // < is bogus, just shuts up warnings
-			r_out = brightness;
-			g_out = brightness;
-			b_out = brightness;
-			return rgb_pixel(r_out * 255, g_out * 255, b_out * 255);
-	}
-	hh = hue;
-	if(hh >= 360.0) hh = 0.0;
-	hh /= 60.0;
-	i = (long)hh;
-	ff = hh - i;
-	p = brightness * (1.0 - saturation);
-	q = brightness * (1.0 - (saturation * ff));
-	t = brightness * (1.0 - (saturation * (1.0 - ff)));
-
-	switch(i) {
-	case 0:
-			r_out = brightness;
-			g_out = t;
-			b_out = p;
-			break;
-	case 1:
-			r_out = q;
-			g_out = brightness;
-			b_out = p;
-			break;
-	case 2:
-			r_out = p;
-			g_out = brightness;
-			b_out = t;
-			break;
-
-	case 3:
-			r_out = p;
-			g_out = q;
-			b_out = brightness;
-			break;
-	case 4:
-			r_out = t;
-			g_out = p;
-			b_out = brightness;
-			break;
-	case 5:
-	default:
-			r_out = brightness;
-			g_out = p;
-			b_out = q;
-			break;
-	}
-
-	return rgb_pixel(r_out * 255, g_out * 255, b_out * 255);
-}
-
-/**
- * @fn static rgbw_pixel RGBtoRGBW1(uint8_t red, uint8_t green, uint8_t blue)
- *
- * @brief First method to convert RGB to RGBW.
- *
- * @code
- *    w = min(r, g, b)
- *    r, g, b = r - w, g - w, b - w
- * @endcode
- *
- * @param[in] red, between 0 and 255
- * @param[in] green, between 0 and 255
- * @param[in] blue, between 0 and 255
- *
- */
-static rgbw_pixel RGBtoRGBW1(uint8_t red, uint8_t green, uint8_t blue) {
-	uint8_t white = std::min(red, std::min(green, blue));
-	return rgbw_pixel(
-		red - white,
-		green - white,
-		blue - white,
-		white
-	);
-}
-
-/**
- * @fn static rgbw_pixel RGBtoRGBW2(uint8_t red, uint8_t green, uint8_t blue)
- *
- * @brief Second method to convert RGB to RGBW.
- *
- * Based on https://stackoverflow.com/questions/40312216/converting-rgb-to-rgbw
- *
- * @param[in] red, between 0 and 255
- * @param[in] green, between 0 and 255
- * @param[in] blue, between 0 and 255
- *
- */
-static rgbw_pixel RGBtoRGBW2(uint8_t red, uint8_t green, uint8_t blue) {
-	//Get the maximum between R, G, and B
-	float tM = std::max(red, std::max(green, blue));
-
-	//If the maximum value is 0, immediately return pure black.
-	if(tM == 0)
-	   { return rgbw_pixel(0, 0, 0, 0); }
-
-	//This section serves to figure out what the color with 100% hue is
-	float multiplier = 255.0f / tM;
-	float hR = red * multiplier;
-	float hG = green * multiplier;
-	float hB = blue * multiplier;
-
-	//This calculates the Whiteness (not strictly speaking Luminance) of the color
-	float M = std::max(hR, std::max(hG, hB));
-	float m = std::min(hR, std::min(hG, hB));
-	float Luminance = ((M + m) / 2.0f - 127.5f) * (255.0f/127.5f) / multiplier;
-
-	//Calculate the output values
-	uint8_t Wo = Luminance;
-	uint8_t  Bo = blue - Luminance;
-	uint8_t  Ro = red - Luminance;
-	uint8_t  Go = green - Luminance;
-
-	return rgbw_pixel(Ro, Go, Bo, Wo);
-}
 
 /**
 * @brief rgb_pixel constructor.
-* @param[in] red, between 0 and 255
-* @param[in] green, between 0 and 255
-* @param[in] blue, between 0 and 255
+*
+* @param red	between 0 and 255
+* @param green	between 0 and 255
+* @param blue	between 0 and 255
 *
 */
  rgb_pixel::rgb_pixel(uint8_t red, uint8_t green, uint8_t blue){
@@ -184,10 +36,10 @@ static rgbw_pixel RGBtoRGBW2(uint8_t red, uint8_t green, uint8_t blue) {
  /**
  * @brief rgbw_pixel constructor.
  *
- * @param[in] red, between 0 and 255
- * @param[in] green, between 0 and 255
- * @param[in] blue, between 0 and 255
- * @param[in] white, between 0 and 255
+ * @param red between 0 and 255
+ * @param green between 0 and 255
+ * @param blue between 0 and 255
+ * @param white between 0 and 255
  *
  */
  rgbw_pixel::rgbw_pixel(uint8_t red, uint8_t green, uint8_t blue, uint8_t white){
@@ -205,11 +57,11 @@ static rgbw_pixel RGBtoRGBW2(uint8_t red, uint8_t green, uint8_t blue) {
  }
 
 /**
- * @brieg hsb_pixel constructor
+ * @brief hsb_pixel constructor
  *
- * @param[in] hue, between 0 and 360
- * @param[in] saturation, between 0 and 1
- * @param[in] brightness, between 0 and 1
+ * @param hue between 0 and 360
+ * @param saturation between 0 and 1
+ * @param brightness between 0 and 1
  */
 hsb_pixel::hsb_pixel(float hue, float saturation, float brightness)
 {
@@ -219,7 +71,7 @@ hsb_pixel::hsb_pixel(float hue, float saturation, float brightness)
 }
 
 /**
- * @brief hesb_pixel default constructor.
+ * @brief hsb_pixel default constructor.
  */
 hsb_pixel::hsb_pixel()
 {
@@ -233,6 +85,11 @@ hsb_pixel::hsb_pixel()
  * This is:
  * 	- a logic 1 during t1h
  * 	- a logic 0 during t1l
+ *
+ * t1h and t1l are retrieved from the current strip, depending
+ * on its model.
+ *
+ * @param pItem rmt item to set to 1
  */
 void Strip::setItem1(rmt_item32_t* pItem) {
 	assert(pItem != nullptr);
@@ -251,6 +108,11 @@ void Strip::setItem1(rmt_item32_t* pItem) {
  * This is:
  * a logic 1 for t0h
  * a logic 0 for t0l
+ *
+ * t1h and t1l are retrieved from the current strip, depending
+ * on its model.
+ *
+ * @param pItem rmt item to set to 0
  */
 void Strip::setItem0(rmt_item32_t* pItem) {
 	assert(pItem != nullptr);
@@ -300,13 +162,13 @@ static uint8_t getChannelValueByType(char type, rgb_pixel pixel) {
  * You shouldn't need to call this class directly, but you can use it to drive
  * other led strips not currently supported, with custom duration values.
  *
- * @param[in] gpioNum, Led Strip GPIO.
- * @param[in] pixelCount, Number of leds.
- * @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
- * @param[in] t0h, high value duration for bit 0, expressed in RMT ticks.
- * @param[in] t0l, low value duration for bit 0, expressed in RMT ticks.
- * @param[in] t1h, high value duration for bit 1, expressed in RMT ticks.
- * @param[in] t1l, low value duration for bit 0, expressed in RMT ticks.
+ * @param gpioNum Led Strip GPIO.
+ * @param pixelCount Number of leds.
+ * @param channel RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+ * @param t0h high value duration for bit 0, expressed in RMT ticks.
+ * @param t0l low value duration for bit 0, expressed in RMT ticks.
+ * @param t1h high value duration for bit 1, expressed in RMT ticks.
+ * @param t1l low value duration for bit 0, expressed in RMT ticks.
  */
 RGB_Strip::RGB_Strip(gpio_num_t gpioNum, uint16_t pixelCount, int channel, uint8_t t0h, uint8_t t0l, uint8_t t1h, uint8_t t1l):
 	Strip(gpioNum, pixelCount, channel, t0h, t0l, t1h, t1l){
@@ -318,9 +180,9 @@ RGB_Strip::RGB_Strip(gpio_num_t gpioNum, uint16_t pixelCount, int channel, uint8
 /**
 * @brief WS2812 (RGB) constructor.
 *
-* @param[in] gpioNum, Led Strip GPIO.
-* @param[in] pixelCount, Number of leds.
-* @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+* @param gpioNum Led Strip GPIO.
+* @param pixelCount Number of leds.
+* @param channel RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
 *
 */
 WS2812::WS2812(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
@@ -339,9 +201,9 @@ WS2812::WS2812(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
 /**
 * @brief WS2815 (RGB) constructor.
 *
-* @param[in] gpioNum, Led Strip GPIO.
-* @param[in] pixelCount, Number of leds.
-* @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+* @param gpioNum Led Strip GPIO.
+* @param pixelCount Number of leds.
+* @param channel RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
 *
 */
 WS2815::WS2815(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
@@ -360,9 +222,9 @@ WS2815::WS2815(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
 /**
 *	@brief SK6812 (RGB) constructor.
 *
-* @param[in] gpioNum, Led Strip GPIO.
-* @param[in] pixelCount, Number of leds.
-* @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+* @param gpioNum Led Strip GPIO.
+* @param pixelCount Number of leds.
+* @param channel RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
 *
 */
 SK6812::SK6812(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
@@ -385,13 +247,13 @@ SK6812::SK6812(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
 * You shouldn't need to call this class directly, but you can use it to drive
 * other led strips not currently supported, with custom duration values.
 *
-* @param[in] gpioNum, Led Strip GPIO.
-* @param[in] pixelCount, Number of leds.
-* @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
-* @param[in] t0h, high value duration for bit 0, expressed in RMT ticks.
-* @param[in] t0l, low value duration for bit 0, expressed in RMT ticks.
-* @param[in] t1h, high value duration for bit 1, expressed in RMT ticks.
-* @param[in] t1l, low value duration for bit 0, expressed in RMT ticks.
+* @param gpioNum Led Strip GPIO.
+* @param pixelCount Number of leds.
+* @param channel RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+* @param t0h high value duration for bit 0, expressed in RMT ticks.
+* @param t0l low value duration for bit 0, expressed in RMT ticks.
+* @param t1h high value duration for bit 1, expressed in RMT ticks.
+* @param t1l low value duration for bit 0, expressed in RMT ticks.
 */
 RGBW_Strip::RGBW_Strip(gpio_num_t gpioNum, uint16_t pixelCount, int channel, uint8_t t0h, uint8_t t0l, uint8_t t1h, uint8_t t1l):
 	Strip(gpioNum, pixelCount, channel, t0h, t0l, t1h, t1l){
@@ -411,7 +273,7 @@ RGBW_Strip::RGBW_Strip(gpio_num_t gpioNum, uint16_t pixelCount, int channel, uin
 /**
 * @brief Sets the RGB to RGBW converter used for RGBW strips.
 *
-* @param[in] converter, reference to the converter function.
+* @param converter reference to the converter function.
 */
 void RGBW_Strip::setRgbToRgbwConverter(rgbw_pixel (*converter) (uint8_t, uint8_t, uint8_t)) {
 	this->rgb2rgbwConverter = converter;
@@ -420,9 +282,9 @@ void RGBW_Strip::setRgbToRgbwConverter(rgbw_pixel (*converter) (uint8_t, uint8_t
 /**
 * @brief SK6812W constructor.
 *
-* @param[in] gpioNum, Led Strip GPIO.
-* @param[in] pixelCount, Number of leds.
-* @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+* @param gpioNum Led Strip GPIO.
+* @param pixelCount Number of leds.
+* @param channel RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
 *
 */
 SK6812W::SK6812W(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
@@ -447,13 +309,13 @@ SK6812W::SK6812W(gpio_num_t gpioNum, uint16_t pixelCount, int channel):
  * will be call by implementing classes (WS2812, SK6812W...) with correct time
  * values.
  *
- * @param[in] gpioNum, Led Strip GPIO.
- * @param[in] pixelCount, Number of leds.
- * @param[in] channel, RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
- * @param[in] t0h, high value duration for bit 0, expressed in RMT ticks.
- * @param[in] t0l, low value duration for bit 0, expressed in RMT ticks.
- * @param[in] t1h, high value duration for bit 1, expressed in RMT ticks.
- * @param[in] t1l, low value duration for bit 0, expressed in RMT ticks.
+ * @param gpioNum Led Strip GPIO.
+ * @param pixelCount Number of leds.
+ * @param channel RMT channel to use. See https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations
+ * @param t0h high value duration for bit 0, expressed in RMT ticks.
+ * @param t0l low value duration for bit 0, expressed in RMT ticks.
+ * @param t1h high value duration for bit 1, expressed in RMT ticks.
+ * @param t1l low value duration for bit 0, expressed in RMT ticks.
  *
  */
 Strip::Strip(gpio_num_t gpioNum, uint16_t pixelCount, int channel, uint8_t t0h, uint8_t t0l, uint8_t t1h, uint8_t t1l) {
@@ -583,10 +445,10 @@ void Strip::setColorOrder(char* colorOrder) {
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] red, The amount of red in the pixel, between 0 and 255.
- * @param [in] green, The amount of green in the pixel, between 0 and 255.
- * @param [in] blue, The amount of blue in the pixel, between 0 and 255.
+ * @param index The pixel that is to have its color set.
+ * @param red The amount of red in the pixel, between 0 and 255.
+ * @param green The amount of green in the pixel, between 0 and 255.
+ * @param blue The amount of blue in the pixel, between 0 and 255.
  *
  */
 void RGB_Strip::setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue) {
@@ -603,10 +465,10 @@ void RGB_Strip::setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blu
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] red, The amount of red in the pixel, between 0 and 255.
- * @param [in] green, The amount of green in the pixel, between 0 and 255.
- * @param [in] blue, The amount of blue in the pixel, between 0 and 255.
+ * @param index The pixel that is to have its color set.
+ * @param red The amount of red in the pixel, between 0 and 255.
+ * @param green The amount of green in the pixel, between 0 and 255.
+ * @param blue The amount of blue in the pixel, between 0 and 255.
  *
  */
 void RGBW_Strip::setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue) {
@@ -617,13 +479,28 @@ void RGBW_Strip::setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t bl
 /**
  * @brief Set the given pixel to the specified color for RGBW strips.
  *
+ * The RGBtoRGBW converter is used to convert from RGB to RGBW.
+ *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] red, The amount of red in the pixel, between 0 and 255.
- * @param [in] green, The amount of green in the pixel, between 0 and 255.
- * @param [in] blue, The amount of blue in the pixel, between 0 and 255.
- * @param [in] white, The amount of white in the pixel, between 0 and 255.
+ * @param index The pixel that is to have its color set.
+ * @param pixel rgb pixel
+ */
+void RGBW_Strip::setPixel(uint16_t index, rgb_pixel pixel) {
+	assert(index < pixelCount);
+	this->pixels[index] = this->rgb2rgbwConverter(pixel.red, pixel.green, pixel.blue);
+} // setPixel
+
+/**
+ * @brief Set the given pixel to the specified color for RGBW strips.
+ *
+ * The LEDs are not actually updated until a call to show().
+ *
+ * @param index The pixel that is to have its color set.
+ * @param red The amount of red in the pixel, between 0 and 255.
+ * @param green The amount of green in the pixel, between 0 and 255.
+ * @param blue The amount of blue in the pixel, between 0 and 255.
+ * @param white The amount of white in the pixel, between 0 and 255.
  */
 void RGBW_Strip::setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue, uint8_t white) {
 	assert(index < pixelCount);
@@ -640,8 +517,8 @@ void RGBW_Strip::setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t bl
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] pixel, The RGB color value of the pixel.
+ * @param index The pixel that is to have its color set.
+ * @param pixel The RGB color value of the pixel.
  */
 void RGB_Strip::setPixel(uint16_t index, rgb_pixel pixel) {
 	assert(index < pixelCount);
@@ -653,8 +530,8 @@ void RGB_Strip::setPixel(uint16_t index, rgb_pixel pixel) {
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index The pixel that is to have its color set.
- * @param [in] pixel The RGBW color value of the pixel.
+ * @param index The pixel that is to have its color set.
+ * @param pixel The RGBW color value of the pixel.
  */
 void RGBW_Strip::setPixel(uint16_t index, rgbw_pixel pixel) {
 	assert(index < pixelCount);
@@ -667,8 +544,8 @@ void RGBW_Strip::setPixel(uint16_t index, rgbw_pixel pixel) {
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] pixel, The RGB color value of the pixel.
+ * @param index The pixel that is to have its color set.
+ * @param pixel The RGB color value of the pixel.
  */
 void RGB_Strip::setPixel(uint16_t index, uint32_t pixel) {
 	assert(index < pixelCount);
@@ -682,8 +559,8 @@ void RGB_Strip::setPixel(uint16_t index, uint32_t pixel) {
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] pixel, The RGBW color value of the pixel.
+ * @param index The pixel that is to have its color set.
+ * @param pixel The RGBW color value of the pixel.
  */
 void RGBW_Strip::setPixel(uint16_t index, uint32_t pixel) {
 	assert(index < pixelCount);
@@ -700,10 +577,10 @@ void RGBW_Strip::setPixel(uint16_t index, uint32_t pixel) {
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] hue, The amount of hue in the pixel (0-360).
- * @param [in] saturation, The amount of saturation in the pixel (0-1).
- * @param [in] brightness, The amount of brightness in the pixel (0-1).
+ * @param index The pixel that is to have its color set.
+ * @param hue The amount of hue in the pixel (0-360).
+ * @param saturation The amount of saturation in the pixel (0-1).
+ * @param brightness The amount of brightness in the pixel (0-1).
  */
 void RGB_Strip::setHSBPixel(uint16_t index, float hue, float saturation, float brightness) {
 	assert(index < pixelCount);
@@ -715,8 +592,8 @@ void RGB_Strip::setHSBPixel(uint16_t index, float hue, float saturation, float b
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index, The pixel that is to have its color set.
- * @param [in] hsb_pixel, HSB colors.
+ * @param index The pixel that is to have its color set.
+ * @param hsb_pixel HSB colors.
  */
 void RGB_Strip::setHSBPixel(uint16_t index, hsb_pixel hsb_pixel) {
 	assert(index < pixelCount);
@@ -730,8 +607,8 @@ void RGB_Strip::setHSBPixel(uint16_t index, hsb_pixel hsb_pixel) {
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index The pixel that is to have its color set.
- * @param [in] hsb_pixel, HSB colors.
+ * @param index The pixel that is to have its color set.
+ * @param hsb_pixel HSB colors.
  */
 void RGBW_Strip::setHSBPixel(uint16_t index, hsb_pixel hsb_pixel) {
 	assert(index < pixelCount);
@@ -748,10 +625,10 @@ void RGBW_Strip::setHSBPixel(uint16_t index, hsb_pixel hsb_pixel) {
  *
  * The LEDs are not actually updated until a call to show().
  *
- * @param [in] index The pixel that is to have its color set.
- * @param [in] hue The amount of hue in the pixel (0-360).
- * @param [in] saturation The amount of saturation in the pixel (0-1).
- * @param [in] brightness The amount of brightness in the pixel (0-1).
+ * @param index The pixel that is to have its color set.
+ * @param hue The amount of hue in the pixel (0-360).
+ * @param saturation The amount of saturation in the pixel (0-1).
+ * @param brightness The amount of brightness in the pixel (0-1).
  */
 void RGBW_Strip::setHSBPixel(uint16_t index, float hue, float saturation, float brightness) {
 	assert(index < pixelCount);

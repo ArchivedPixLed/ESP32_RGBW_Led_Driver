@@ -82,11 +82,12 @@ Inheritance diagram for Strip:</div>
  <div class="center">
   <img src="classStrip.png" usemap="#Strip_map" alt=""/>
   <map id="Strip_map" name="Strip_map">
-<area href="classRGB__Strip.html" title="RGB strip class." alt="RGB_Strip" shape="rect" coords="45,56,126,80"/>
-<area href="classRGBW__Strip.html" alt="RGBW_Strip" shape="rect" coords="182,56,263,80"/>
+<area href="classRGB__Strip.html" title="RGB strip class." alt="RGB_Strip" shape="rect" coords="91,56,172,80"/>
+<area href="classRGBW__Strip.html" alt="RGBW_Strip" shape="rect" coords="273,56,354,80"/>
 <area href="classSK6812.html" title="SK6812 RGB strip implementation." alt="SK6812" shape="rect" coords="0,112,81,136"/>
 <area href="classWS2812.html" title="WS2812 RGB strip implementation." alt="WS2812" shape="rect" coords="91,112,172,136"/>
-<area href="classSK6812W.html" title="SK2812 RGBW strip implementation." alt="SK6812W" shape="rect" coords="182,112,263,136"/>
+<area href="classWS2815.html" title="WS2815 RGB strip implementation." alt="WS2815" shape="rect" coords="182,112,263,136"/>
+<area href="classSK6812W.html" title="SK2812 RGBW strip implementation." alt="SK6812W" shape="rect" coords="273,112,354,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -107,6 +108,9 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setPixel</b> 
 <tr class="memitem:a9ab7cf4699af242f4bcb7d5b74b3b272"><td class="memItemLeft" align="right" valign="top"><a id="a9ab7cf4699af242f4bcb7d5b74b3b272"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setPixel</b> (uint16_t index, uint32_t pixel)=0</td></tr>
 <tr class="separator:a9ab7cf4699af242f4bcb7d5b74b3b272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42ef2834341900e9ac0e7a4ef7f5ce81"><td class="memItemLeft" align="right" valign="top"><a id="a42ef2834341900e9ac0e7a4ef7f5ce81"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setPixel</b> (uint16_t index, <a class="el" href="structrgb__pixel.html">rgb_pixel</a> pixel)=0</td></tr>
+<tr class="separator:a42ef2834341900e9ac0e7a4ef7f5ce81"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2988400369ab6ded2861d9e6f64b2ea8"><td class="memItemLeft" align="right" valign="top"><a id="a2988400369ab6ded2861d9e6f64b2ea8"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>setHSBPixel</b> (uint16_t index, float hue, float saturation, float brightness)=0</td></tr>
 <tr class="separator:a2988400369ab6ded2861d9e6f64b2ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -224,13 +228,13 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>Because <a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> is abstract, this constructor should not be used directly, but will be call by implementing classes (<a class="el" href="classWS2812.html" title="WS2812 RGB strip implementation.">WS2812</a>, <a class="el" href="classSK6812W.html" title="SK2812 RGBW strip implementation.">SK6812W</a>...) with correct time values.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">gpioNum,Led</td><td><a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> GPIO. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pixelCount,Number</td><td>of leds. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">channel,RMT</td><td>channel to use. See <a href="https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations">https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations</a> </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t0h,high</td><td>value duration for bit 0, expressed in RMT ticks. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t0l,low</td><td>value duration for bit 0, expressed in RMT ticks. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t1h,high</td><td>value duration for bit 1, expressed in RMT ticks. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">t1l,low</td><td>value duration for bit 0, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">gpioNum</td><td>Led <a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> GPIO. </td></tr>
+    <tr><td class="paramname">pixelCount</td><td>Number of leds. </td></tr>
+    <tr><td class="paramname">channel</td><td>RMT channel to use. See <a href="https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations">https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations</a> </td></tr>
+    <tr><td class="paramname">t0h</td><td>high value duration for bit 0, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">t0l</td><td>low value duration for bit 0, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">t1h</td><td>high value duration for bit 1, expressed in RMT ticks. </td></tr>
+    <tr><td class="paramname">t1l</td><td>low value duration for bit 0, expressed in RMT ticks. </td></tr>
   </table>
   </dd>
 </dl>
@@ -285,7 +289,14 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div><div class="memdoc">
 
 <p>Set up RMT strip value 0. </p>
-<p>Set two levels of RMT output to the Neopixel value for a "0". This is: a logic 1 for t0h a logic 0 for t0l </p>
+<p>Set two levels of RMT output to the Neopixel value for a "0". This is: a logic 1 for t0h a logic 0 for t0l</p>
+<p>t1h and t1l are retrieved from the current strip, depending on its model.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pItem</td><td>rmt item to set to 0 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -316,14 +327,21 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p>Set up RMT strip value 1. </p>
 <p>Set two levels of RMT output to the Neopixel value for a "1". This is:</p><ul>
 <li>a logic 1 during t1h</li>
-<li>a logic 0 during t1l </li>
+<li>a logic 0 during t1l</li>
 </ul>
+<p>t1h and t1l are retrieved from the current strip, depending on its model.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pItem</td><td>rmt item to set to 1 </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>components/esp32_rgbw_led_driver/include/<a class="el" href="LedStrip_8h_source.html">LedStrip.h</a></li>
-<li>components/esp32_rgbw_led_driver/<a class="el" href="LedStrip_8cpp.html">LedStrip.cpp</a></li>
+<li>components/esp32_rgbw_led_driver/LedStrip.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

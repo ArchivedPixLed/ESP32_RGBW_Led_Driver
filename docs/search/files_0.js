@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['ledstrip_2ecpp',['LedStrip.cpp',['../LedStrip_8cpp.html',1,'']]]
+  ['ledstrip_2eh',['LedStrip.h',['../LedStrip_8h.html',1,'']]]
 ];

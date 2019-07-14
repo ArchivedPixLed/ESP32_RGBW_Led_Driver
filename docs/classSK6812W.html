@@ -96,6 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8f9f94859f06a93b7230fd9db261897e inherit pub_methods_classRGBW__Strip"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGBW__Strip.html#a8f9f94859f06a93b7230fd9db261897e">setPixel</a> (uint16_t index, uint8_t red, uint8_t green, uint8_t blue)</td></tr>
 <tr class="memdesc:a8f9f94859f06a93b7230fd9db261897e inherit pub_methods_classRGBW__Strip"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified color for RGBW strips.  <a href="classRGBW__Strip.html#a8f9f94859f06a93b7230fd9db261897e">More...</a><br /></td></tr>
 <tr class="separator:a8f9f94859f06a93b7230fd9db261897e inherit pub_methods_classRGBW__Strip"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1a341e3b1a569f97dbf8041201cdb98a inherit pub_methods_classRGBW__Strip"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGBW__Strip.html#a1a341e3b1a569f97dbf8041201cdb98a">setPixel</a> (uint16_t index, <a class="el" href="structrgb__pixel.html">rgb_pixel</a> pixel)</td></tr>
+<tr class="memdesc:a1a341e3b1a569f97dbf8041201cdb98a inherit pub_methods_classRGBW__Strip"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified color for RGBW strips.  <a href="classRGBW__Strip.html#a1a341e3b1a569f97dbf8041201cdb98a">More...</a><br /></td></tr>
+<tr class="separator:a1a341e3b1a569f97dbf8041201cdb98a inherit pub_methods_classRGBW__Strip"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c4af9331a1d0c3c7bbef32fa7f12eea inherit pub_methods_classRGBW__Strip"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRGBW__Strip.html#a8c4af9331a1d0c3c7bbef32fa7f12eea">setPixel</a> (uint16_t index, <a class="el" href="structrgbw__pixel.html">rgbw_pixel</a> pixel)</td></tr>
 <tr class="memdesc:a8c4af9331a1d0c3c7bbef32fa7f12eea inherit pub_methods_classRGBW__Strip"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the given pixel to the specified color for RGBW strip.  <a href="classRGBW__Strip.html#a8c4af9331a1d0c3c7bbef32fa7f12eea">More...</a><br /></td></tr>
 <tr class="separator:a8c4af9331a1d0c3c7bbef32fa7f12eea inherit pub_methods_classRGBW__Strip"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -214,9 +217,9 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 <p><a class="el" href="classSK6812W.html" title="SK2812 RGBW strip implementation.">SK6812W</a> constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">gpioNum,Led</td><td><a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> GPIO. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">pixelCount,Number</td><td>of leds. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">channel,RMT</td><td>channel to use. See <a href="https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations">https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations</a> </td></tr>
+    <tr><td class="paramname">gpioNum</td><td>Led <a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> GPIO. </td></tr>
+    <tr><td class="paramname">pixelCount</td><td>Number of leds. </td></tr>
+    <tr><td class="paramname">channel</td><td>RMT channel to use. See <a href="https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations">https://docs.espressif.com/projects/esp-idf/en/latest/api-reference/peripherals/rmt.html#enumerations</a> </td></tr>
   </table>
   </dd>
 </dl>
@@ -225,7 +228,7 @@ uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>t1l</b></td></tr>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>components/esp32_rgbw_led_driver/include/<a class="el" href="LedStrip_8h_source.html">LedStrip.h</a></li>
-<li>components/esp32_rgbw_led_driver/<a class="el" href="LedStrip_8cpp.html">LedStrip.cpp</a></li>
+<li>components/esp32_rgbw_led_driver/LedStrip.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

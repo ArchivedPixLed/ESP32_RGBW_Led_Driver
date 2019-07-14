@@ -2,6 +2,10 @@
 #ifndef MAIN_LEDSTRIP_H_
 #define MAIN_LEDSTRIP_H_
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdexcept>
+#include <algorithm>
+
 #include <driver/rmt.h>
 #include <driver/gpio.h>
 #include "esp_log.h"
@@ -117,6 +121,18 @@ static const char* LOG_TAG = "LedStrip";
  */
 
 /**
+ * @file LedStrip.h
+ *
+ * Two functions, RGBtoRGBW1 and RGBtoRGBW2, are available to convert RGB
+ * components to RGBW components.
+ *
+ * By default, RGBtoRGBW2 is used. You can set up the function :
+ *  - at compile time, with Make Menuconfig => Component config => Led Strip Config
+ *  - at runtime, see RGBW_Strip::setRgbToRgbwConverter
+ *
+ */
+
+/**
  * @brief A data type representing and RGB pixel.
  */
 struct rgb_pixel {
@@ -171,6 +187,144 @@ struct hsb_pixel {
 };
 
 /**
+ * @fn static rgb_pixel HSBtoRGB(float hue, float saturation, float brightness)
+ *
+ * @brief Converts the specified HSB color to an RGB color.
+ *
+ * @param hue between 0 and 360
+ * @param saturation between 0 and 1
+ * @param brightness between 0 and 1
+ * @return converted rgb pixel
+ */
+static rgb_pixel HSBtoRGB(float hue, float saturation, float brightness) {
+
+	double      hh, p, q, t, ff;
+	long        i;
+	double      r_out;
+	double      g_out;
+	double 	    b_out;
+
+	if(saturation <= 0.0) {       // < is bogus, just shuts up warnings
+			r_out = brightness;
+			g_out = brightness;
+			b_out = brightness;
+			return rgb_pixel(r_out * 255, g_out * 255, b_out * 255);
+	}
+	hh = hue;
+	if(hh >= 360.0) hh = 0.0;
+	hh /= 60.0;
+	i = (long)hh;
+	ff = hh - i;
+	p = brightness * (1.0 - saturation);
+	q = brightness * (1.0 - (saturation * ff));
+	t = brightness * (1.0 - (saturation * (1.0 - ff)));
+
+	switch(i) {
+	case 0:
+			r_out = brightness;
+			g_out = t;
+			b_out = p;
+			break;
+	case 1:
+			r_out = q;
+			g_out = brightness;
+			b_out = p;
+			break;
+	case 2:
+			r_out = p;
+			g_out = brightness;
+			b_out = t;
+			break;
+
+	case 3:
+			r_out = p;
+			g_out = q;
+			b_out = brightness;
+			break;
+	case 4:
+			r_out = t;
+			g_out = p;
+			b_out = brightness;
+			break;
+	case 5:
+	default:
+			r_out = brightness;
+			g_out = p;
+			b_out = q;
+			break;
+	}
+
+	return rgb_pixel(r_out * 255, g_out * 255, b_out * 255);
+}
+
+/**
+ * @fn static rgbw_pixel RGBtoRGBW1(uint8_t red, uint8_t green, uint8_t blue)
+ *
+ * @brief First method to convert RGB to RGBW.
+ *
+ * @code
+ *    w = min(r, g, b)
+ *    r, g, b = r - w, g - w, b - w
+ * @endcode
+ *
+ * @param red between 0 and 255
+ * @param green between 0 and 255
+ * @param blue between 0 and 255
+ *
+ * @return converted rgbw pixel
+ */
+static rgbw_pixel RGBtoRGBW1(uint8_t red, uint8_t green, uint8_t blue) {
+	uint8_t white = std::min(red, std::min(green, blue));
+	return rgbw_pixel(
+		red - white,
+		green - white,
+		blue - white,
+		white
+	);
+}
+
+/**
+ * @fn static rgbw_pixel RGBtoRGBW2(uint8_t red, uint8_t green, uint8_t blue)
+ *
+ * @brief Second method to convert RGB to RGBW.
+ *
+ * Based on https://stackoverflow.com/questions/40312216/converting-rgb-to-rgbw
+ *
+ * @param red between 0 and 255
+ * @param green between 0 and 255
+ * @param blue between 0 and 255
+ *
+ * @return converted rgbw pixel
+ */
+static rgbw_pixel RGBtoRGBW2(uint8_t red, uint8_t green, uint8_t blue) {
+	//Get the maximum between R, G, and B
+	float tM = std::max(red, std::max(green, blue));
+
+	//If the maximum value is 0, immediately return pure black.
+	if(tM == 0)
+	   { return rgbw_pixel(0, 0, 0, 0); }
+
+	//This section serves to figure out what the color with 100% hue is
+	float multiplier = 255.0f / tM;
+	float hR = red * multiplier;
+	float hG = green * multiplier;
+	float hB = blue * multiplier;
+
+	//This calculates the Whiteness (not strictly speaking Luminance) of the color
+	float M = std::max(hR, std::max(hG, hB));
+	float m = std::min(hR, std::min(hG, hB));
+	float Luminance = ((M + m) / 2.0f - 127.5f) * (255.0f/127.5f) / multiplier;
+
+	//Calculate the output values
+	uint8_t Wo = Luminance;
+	uint8_t  Bo = blue - Luminance;
+	uint8_t  Ro = red - Luminance;
+	uint8_t  Go = green - Luminance;
+
+	return rgbw_pixel(Ro, Go, Bo, Wo);
+}
+
+/**
  * @brief General and abstract led Strip class.
  */
 class Strip {
@@ -180,11 +334,12 @@ public:
 	void setColorOrder(char* order);
 	virtual void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue) = 0;
 	virtual void setPixel(uint16_t index, uint32_t pixel) = 0;
+	virtual void setPixel(uint16_t index, rgb_pixel pixel) = 0;
 	virtual void setHSBPixel(uint16_t index, float hue, float saturation, float brightness) = 0;
 	virtual void setHSBPixel(uint16_t index, hsb_pixel pixel) = 0;
 	virtual void clear() = 0;
 	virtual ~Strip();
-	uint16_t       pixelCount;
+	uint16_t pixelCount;
 
 protected:
 	char*          colorOrder;
@@ -226,6 +381,7 @@ class RGBW_Strip:  public Strip {
 public:
 	RGBW_Strip(gpio_num_t gpioNum, uint16_t pixelCount, int channel, uint8_t t0h, uint8_t t0l, uint8_t t1h, uint8_t t1l);
 	void setPixel(uint16_t index, uint8_t red, uint8_t green, uint8_t blue);
+	void setPixel(uint16_t index, rgb_pixel pixel);
 	void setPixel(uint16_t index, rgbw_pixel pixel);
 	void setPixel(uint16_t index, uint32_t pixel);
 	void setHSBPixel(uint16_t index, float hue, float saturation, float brightness);

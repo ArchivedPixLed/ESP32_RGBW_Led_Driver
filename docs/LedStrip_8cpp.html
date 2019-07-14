@@ -73,26 +73,13 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;driver/rmt.h&gt;</code><br />
 <code>#include &lt;driver/gpio.h&gt;</code><br />
-<code>#include &lt;stdint.h&gt;</code><br />
-<code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;stdexcept&gt;</code><br />
-<code>#include &lt;algorithm&gt;</code><br />
 <code>#include &quot;GPIO.h&quot;</code><br />
 <code>#include &quot;sdkconfig.h&quot;</code><br />
 <code>#include &quot;LedStrip.h&quot;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a3e06fcd5dd4854ecd29730bf12771bc1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structrgb__pixel.html">rgb_pixel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LedStrip_8cpp.html#a3e06fcd5dd4854ecd29730bf12771bc1">HSBtoRGB</a> (float hue, float saturation, float brightness)</td></tr>
-<tr class="memdesc:a3e06fcd5dd4854ecd29730bf12771bc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the specified HSB color to an RGB color.  <a href="#a3e06fcd5dd4854ecd29730bf12771bc1">More...</a><br /></td></tr>
-<tr class="separator:a3e06fcd5dd4854ecd29730bf12771bc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a835c93fef5ce6d7ea31243a76aaa1ab2"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structrgbw__pixel.html">rgbw_pixel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LedStrip_8cpp.html#a835c93fef5ce6d7ea31243a76aaa1ab2">RGBtoRGBW1</a> (uint8_t red, uint8_t green, uint8_t blue)</td></tr>
-<tr class="memdesc:a835c93fef5ce6d7ea31243a76aaa1ab2"><td class="mdescLeft">&#160;</td><td class="mdescRight">First method to convert RGB to RGBW.  <a href="#a835c93fef5ce6d7ea31243a76aaa1ab2">More...</a><br /></td></tr>
-<tr class="separator:a835c93fef5ce6d7ea31243a76aaa1ab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acc64637652469b5e3bb8ca25cd71675e"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structrgbw__pixel.html">rgbw_pixel</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="LedStrip_8cpp.html#acc64637652469b5e3bb8ca25cd71675e">RGBtoRGBW2</a> (uint8_t red, uint8_t green, uint8_t blue)</td></tr>
-<tr class="memdesc:acc64637652469b5e3bb8ca25cd71675e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second method to convert RGB to RGBW.  <a href="#acc64637652469b5e3bb8ca25cd71675e">More...</a><br /></td></tr>
-<tr class="separator:acc64637652469b5e3bb8ca25cd71675e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a15759aec58cad10399cf7dff609865"><td class="memItemLeft" align="right" valign="top"><a id="a5a15759aec58cad10399cf7dff609865"></a>
 static void&#160;</td><td class="memItemRight" valign="bottom"><b>setTerminator</b> (rmt_item32_t *pItem)</td></tr>
 <tr class="separator:a5a15759aec58cad10399cf7dff609865"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -106,158 +93,7 @@ static uint8_t&#160;</td><td class="memItemRight" valign="bottom"><b>getChannelV
 <li>at compile time, with Make Menuconfig =&gt; Component config =&gt; Led <a class="el" href="classStrip.html" title="General and abstract led Strip class.">Strip</a> Config</li>
 <li>at runtime, see <a class="el" href="classRGBW__Strip.html#a37960460a546a371802dc728d10d8ee0" title="Sets the RGB to RGBW converter used for RGBW strips.">RGBW_Strip::setRgbToRgbwConverter</a> </li>
 </ul>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a id="a3e06fcd5dd4854ecd29730bf12771bc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e06fcd5dd4854ecd29730bf12771bc1">&#9670;&nbsp;</a></span>HSBtoRGB()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="structrgb__pixel.html">rgb_pixel</a> HSBtoRGB </td>
-          <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>hue</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>saturation</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>brightness</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Converts the specified HSB color to an RGB color. </p>
-<p>param [in] hue, between 0 and 360 param [in] saturation, between 0 and 1 param [in] brightness, between 0 and 1 </p>
-
-</div>
-</div>
-<a id="a835c93fef5ce6d7ea31243a76aaa1ab2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a835c93fef5ce6d7ea31243a76aaa1ab2">&#9670;&nbsp;</a></span>RGBtoRGBW1()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="structrgbw__pixel.html">rgbw_pixel</a> RGBtoRGBW1 </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>red</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>green</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>blue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>First method to convert RGB to RGBW. </p>
-<div class="fragment"><div class="line">w = min(r, g, b)</div><div class="line">r, g, b = r - w, g - w, b - w</div></div><!-- fragment --><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">red,between</td><td>0 and 255 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">green,between</td><td>0 and 255 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">blue,between</td><td>0 and 255 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="acc64637652469b5e3bb8ca25cd71675e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc64637652469b5e3bb8ca25cd71675e">&#9670;&nbsp;</a></span>RGBtoRGBW2()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static <a class="el" href="structrgbw__pixel.html">rgbw_pixel</a> RGBtoRGBW2 </td>
-          <td>(</td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>red</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>green</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>blue</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Second method to convert RGB to RGBW. </p>
-<p>Based on <a href="https://stackoverflow.com/questions/40312216/converting-rgb-to-rgbw">https://stackoverflow.com/questions/40312216/converting-rgb-to-rgbw</a></p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">red,between</td><td>0 and 255 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">green,between</td><td>0 and 255 </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">blue,between</td><td>0 and 255 </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
